@@ -33,6 +33,8 @@ class Game {
         this.hostDoor()
         this.guestFinalPick()
         this.guestFinalPickSwitch()
+        this.isTheGameWon()
+        this.isTheGameWonWithChange()
         
     }
     myDoors() {
@@ -63,8 +65,9 @@ class Game {
         
         for(var i=0; i<3; i++) {
            if(this.doors[i] != this.carInDoor && this.doors[i] != this.doorPicked)
-           this.doors[i].opened = true;
+           
            this.openedGoatDoor = this.doors[i]
+           return this.doors[i].opened = true;
 
         }
     }
@@ -72,7 +75,7 @@ class Game {
     guestFinalPickSwitch(){
         for(var i=0; i<3; i++){
             if(this.doors[i] != this.openedGoatDoor && this.doors[i] != this.doorPicked)
-            return this.finalPick = this.doors[i]
+            this.finalPick = this.doors[i]
         }
     }
 
@@ -129,35 +132,41 @@ class Statistics {
     }
     statisticsWithChange(totalGame){
         let gameWon = 0
+        let gameLost = 0
         for(var i=0; i<totalGame; i++){
             let game = new Game()
             game.doGameWithChange()
             if(game.isTheGameWonWithChange() == true){
                 this.gamesWithDoorChangeWon++
             } else{
-                this.gamesWithSameDoorLost++
+                this.gamesWithDoorChangeLost++
             }
             gameWon= this.gamesWithDoorChangeWon/totalGame*100
+            gameLost= this.gamesWithDoorChangeLost/totalGame*100
         }
-        return gameWon + "% of games were won when switching door"
+        return gameWon + "% of games were won when not switching door"
     }
-
+    
     statisticsWithNoChange(totalGame){
         let gameWon = 0
+        let gameLost = 0
         for(var i=0; i<totalGame; i++){
             let game = new Game()
             game.doGameNoChange()
             if(game.isTheGameWon() == true){
                 this.gamesWithDoorChangeWon++
             } else{
-                this.gamesWithDoorChangeLost++
+                this.gamesWithSameDoorLost++
             }
             gameWon = this.gamesWithDoorChangeWon/totalGame*100
+            gameLost = this.gamesWithSameDoorLost/totalGame*100
         }
-        return gameWon + "% of games were won when not switching door"
+        return gameWon + "% of games were won when switching door"
     }
 }
 
 let statisticsFinal = new Statistics()
 console.log(statisticsFinal.statisticsWithChange(10000))
 console.log(statisticsFinal.statisticsWithNoChange(10000))
+
+

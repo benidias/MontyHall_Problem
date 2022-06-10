@@ -1,12 +1,13 @@
 Define Door Using number AND isCar
-   // Constructor
+   sequence Constructor
    Set This number to number
    set this isCar to isCar
    set this opened to false
+   Endsequence
 ENDDEFINE
 
 Define Game with no initial parameters
-   // Constructor
+   sequence Constructor
    set THIS doors to Ampty array
    set this carInDoor
    Set This doorPicked
@@ -19,6 +20,7 @@ Define Game with no initial parameters
    set this hostDoor
    set this guestFinalPick
    set this guestFinalPickSwitch
+   Endsequence
 
 
    Sequence myDoors
@@ -86,15 +88,38 @@ Define Game with no initial parameters
 ENDDEFINE
 
 Define statistics
-// Constructor
+   sequence Constructor
    set this gamesWithSameDoorWon
    set this gamesWithSameDoorLost
    set this gamesWithDoorChangeWon
    set this gamesWithDoorChangeLost
+   Endsequence
+   
    sequence statisticsWithChange using totalGame
    set gameWon to 0
-   for i equals 0, i less 
+   for i equals 0, i lower than totalGame increment i
+   set game to new Game 
+   Call game doGameWithChange
+   if gam isTheGameWonWithChange equals true 
+   increment this gamesWithDoorChangeWon
+   else increment gamesWithSameDoorLost
+   set gameWon to this gamesWithDoorChangeWon divided by totalGame multiplied by 100
+   set gameLost to this gamesWithDoorChangeLost divided by totalGame multiplied by 100
+   return gameWon + " % of games won when not switching Game"
+   Endsequence
 
+   sequence statisticsWithNoChange using totalGame
+   set gameWon to 0
+   set gameLost to 0
+   for i equals 0, i lower than totalGame increment i
+   set game to new Game
+   call game doGameNoChange
+   if game isTheGameWon equals true
+   increment this gamesWithDoorChangeWon
+   else increment this.gamesWithSameDoorLost
+   set gameWon to this gameWithDoorChangeWon divided by totalGame multiplied by 100
+   set gameWon to this gameWithSameDoorLost divided by totalGame multiplied by 100
+   return gameWon + " % of games won when switching Game"
 
 
 
