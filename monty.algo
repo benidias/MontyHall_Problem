@@ -1,0 +1,103 @@
+Define Door Using number AND isCar
+   // Constructor
+   Set This number to number
+   set this isCar to isCar
+   set this opened to false
+ENDDEFINE
+
+Define Game with no initial parameters
+   // Constructor
+   set THIS doors to Ampty array
+   set this carInDoor
+   Set This doorPicked
+   set this openedGoatDoor
+   set this finalPick
+   set THIS won
+   set this myDoors
+   set this chooseCarDoor
+   set this guestDoor
+   set this hostDoor
+   set this guestFinalPick
+   set this guestFinalPickSwitch
+
+
+   Sequence myDoors
+   set door1 to new Door number0, isCar false
+   set door2 to new Door number1, isCar false
+   set door3 to new Door number2, isCar false
+   Then push them to this doors array
+   Endsequence 
+
+   sequence chooseCarDoor
+   set doorContaincar to random number between 0 and 2
+   set this carInDoor to this doors and give this doors the value of doorContainCar
+   set this.carInDoor.isCar to true
+   Endsequence
+
+   sequence guestDoor 
+   set doorGuest to random number between 0 and 2
+   set this.doorPicked to this doors and give this doors the value of doorGuest
+   Endsequence
+
+   sequence hostDoor
+   for i equals 0, i lower than 3, increment i 
+   if this doors i not equals this carInDoor and this doorPicked
+   set this doors i opened to true
+   set this openedGoatDoor to this doors i
+   Endsequence
+
+   sequence guestFinalPickSwitch
+   for i equals 0, i lower than 3, increment i
+   if this doors i not equals this openedGoatDoor and this doorPicked
+   return and set this finalPick to this doors if
+   Endsequence
+
+   sequence guestFinalPick
+   set this finalPick to this doorPicked
+
+   sequence isTheGameWonWithChange
+   set this won to false
+   if this doorPicked equals this carInDoor
+   set this won to true
+   return this won
+
+   sequence isTheGameWon
+   set this won to false
+   if this doorPicked equals this carInDoor
+   set this won to true
+   return this won
+   Endsequence
+
+   sequence doGameWithChange
+   call chooseCarDoor
+   call guestDoor
+   call hostDoor
+   call guestFinalPickSwitch
+   return this isTheGameWonWithChange
+   Endsequence
+
+   sequence doGameNoChange
+   call chooseCarDoor
+   call guestDoor
+   call hostDoor
+   call guestFinalPick
+   return this isTheGameWon
+   Endsequence
+ENDDEFINE
+
+Define statistics
+// Constructor
+   set this gamesWithSameDoorWon
+   set this gamesWithSameDoorLost
+   set this gamesWithDoorChangeWon
+   set this gamesWithDoorChangeLost
+   sequence statisticsWithChange using totalGame
+   set gameWon to 0
+   for i equals 0, i less 
+
+
+
+
+
+
+
