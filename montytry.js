@@ -33,7 +33,7 @@ class Game {
         this.hostDoor()
         this.guestFinalPick()
         this.guestFinalPickSwitch()
-        this.isTheGameWon()
+        this.isTheGameWonWithNoChange()
         this.isTheGameWonWithChange()
         
     }
@@ -94,7 +94,7 @@ class Game {
         return this.won;
         
     }
-    isTheGameWon(){
+    isTheGameWonWithNoChange(){
         this.won = false
         if(this.doorPicked == this.carInDoor){
             this.won = true;
@@ -117,7 +117,7 @@ class Game {
     this.guestDoor()
     this.hostDoor()
     this.guestFinalPick()
-    return this.isTheGameWon()
+    return this.isTheGameWonWithNoChange()
     }
 
 }
@@ -153,7 +153,7 @@ class Statistics {
         for(var i=0; i<totalGame; i++){
             let game = new Game()
             game.doGameNoChange()
-            if(game.isTheGameWon() == true){
+            if(game.isTheGameWonWithNoChange() == true){
                 this.gamesWithDoorChangeWon++
             } else{
                 this.gamesWithSameDoorLost++
